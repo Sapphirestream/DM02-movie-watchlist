@@ -12,8 +12,8 @@ function App() {
   const [watchList, setWatchList] = useState([]);
   const [page, setPage] = useState(1);
   const [list, setList] = useState([
-    { original_title: "Movie 1", id: 1 },
-    { original_title: "Movie 2", id: 2 },
+    // { original_title: "Movie 1", id: 1 },
+    // { original_title: "Movie 2", id: 2 },
   ]);
 
   const getData = () => {
@@ -33,6 +33,13 @@ function App() {
     });
   };
 
+  const removeMovie = (removedMovie) => {
+    const newState = list.filter((movie) => {
+      return movie != removedMovie;
+    });
+    setList(newState);
+  };
+
   useEffect(() => {
     getData();
   }, [page]);
@@ -47,8 +54,9 @@ function App() {
           movieList={movieList}
           list={list}
           addMovie={addMovie}
+          removeMovie={removeMovie}
         />
-        <Watchlist list={list} addMovie={addMovie} />
+        <Watchlist list={list} addMovie={addMovie} removeMovie={removeMovie} />
       </main>
     </div>
   );
